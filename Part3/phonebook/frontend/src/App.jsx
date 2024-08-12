@@ -87,6 +87,15 @@ const App = () => {
                 setNewName('')
                 setNewNumber('')
               })
+            .catch((err) => {
+              setNotificationType(
+                'fail'
+              )
+              setNotification(err.response.data.error);
+              setTimeout(() => {
+                setNotification(null)
+              }, 3000)
+            })
           setNotificationType(
             'success'
           )
@@ -117,6 +126,15 @@ const App = () => {
         setNotification(
           `Added ${newName}`
         )
+        setTimeout(() => {
+          setNotification(null)
+        }, 3000)
+      })
+      .catch((err) => {
+        setNotificationType(
+          'fail'
+        )
+        setNotification(err.response.data.error);
         setTimeout(() => {
           setNotification(null)
         }, 3000)
