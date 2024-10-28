@@ -60,7 +60,6 @@ blogsRouter.post('/', tokenExtractor, userExtractor, async (request, response, n
 
 blogsRouter.put('/:id',  async (request, response, next) => {
 
-
     const body = request.body
 
     const blog = {

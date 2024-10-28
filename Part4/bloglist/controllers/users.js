@@ -33,15 +33,21 @@ usersRouter.post('/', async (request, response, next) => {
 
   const passwordHash = await bcrypt.hash(password, saltRounds)
 
+  const isExist = await User.findOne({ username });
+  if (isExist) {
+    return response.status(400).json({
+      error: "username must be unique",
+    })
+  }
+
   const user = new User({
     username,
     name,
     passwordHash,
   })
 
-  const savedUser = await user.save().catch(err => next(err))
+  const savedUser = await user.save()
   response.status(201).json(savedUser)
 })
-
 
 module.exports = usersRouter
